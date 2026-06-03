@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Piano Café Baszta | Kawa, pizza i muzyka przy Baszcie</title>
+
+  <meta
+    name="description"
+    content="Piano Café Baszta w Szczecinie. Kawa, pizza z pieca opalanego drewnem, wino, lemoniady i elegancka przestrzeń przy Baszcie."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --black: #080808;
+      --black-soft: #121212;
+      --ivory: #f4eddf;
+      --ivory-dark: #e3d6bf;
+      --gold: #c8a96a;
+      --green: #2f4635;
+      --green-dark: #1f2f25;
+      --red: #7d2f25;
+      --text: #f8f1e7;
+      --muted: #bfb5a5;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--black);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 0.95;
+      margin-bottom: 22px;
+    }
+
+    .section-text {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 680px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(200, 169, 106, 0.25);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(244, 237, 223, 0.28);
+      color: var(--text);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 50;
+      width: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.82), rgba(0,0,0,0));
+    }
+
+    .nav {
+      width: min(1220px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo span:first-child {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .logo span:last-child {
+      font-size: 0.72rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: rgba(255,255,255,0.84);
+      font-size: 0.94rem;
+    }
+
+    .nav-links a {
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-cta {
+      padding: 10px 17px;
+      border: 1px solid rgba(200,169,106,0.6);
+      border-radius: 999px;
+      color: var(--gold);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.62) 42%, rgba(0,0,0,0.18) 100%),
+        url("assets/hero.jpg") center/cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 180px;
+      background: linear-gradient(to top, var(--black), transparent);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(1220px, calc(100% - 40px));
+      padding-top: 80px;
+    }
+
+    .hero-inner {
+      max-width: 760px;
+    }
+
+    .hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(4rem, 11vw, 8.5rem);
+      line-height: 0.82;
+      letter-spacing: -0.05em;
+      margin-bottom: 26px;
+    }
+
+    .hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero p {
+      max-width: 660px;
+      color: rgba(255,255,255,0.82);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 46px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .badge {
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(12px);
+      color: rgba(255,255,255,0.82);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+    }
+
+    section {
+      padding: 110px 0;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 0.88fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .image-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 500px;
+      background: var(--black-soft);
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+
+    .image-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45), transparent 58%);
+    }
+
+    .floating-note {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      z-index: 2;
+      width: min(330px, calc(100% - 48px));
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 20px;
+      background: rgba(0,0,0,0.52);
+      backdrop-filter: blur(14px);
+    }
+
+    .floating-note strong {
+      display: block;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .feature {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      padding: 24px;
+      border-radius: var(--radius-md);
+    }
+
+    .feature span {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      background: rgba(200,169,106,0.12);
+      color: var(--gold);
+      border-radius: 50%;
+      margin-bottom: 16px;
+      font-size: 1.25rem;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .menu-section {
+      background:
+        radial-gradient(circle at top left, rgba(200,169,106,0.14), transparent 32%),
+        linear-gradient(180deg, var(--black), #10130f);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .section-head .section-text {
+      max-width: 520px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .menu-card {
+      position: relative;
+      min-height: 390px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--black-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+      opacity: 0.68;
+      transition: 0.3s ease;
+    }
+
+    .menu-card:hover img {
+      transform: scale(1.05);
+      opacity: 0.82;
+    }
+
+    .menu-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1));
+    }
+
+    .menu-card-content {
+      position: absolute;
+      inset: auto 0 0;
+      z-index: 2;
+      padding: 26px;
+    }
+
+    .menu-card h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.1rem;
+      margin-bottom: 10px;
+    }
+
+    .menu-card p {
+      color: rgba(255,255,255,0.74);
+      font-size: 0.96rem;
+      margin-bottom: 16px;
+    }
+
+    .menu-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .menu-items span {
+      font-size: 0.78rem;
+      color: var(--black);
+      background: var(--ivory);
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-weight: 700;
+    }
+
+    .pizza {
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.88), rgba(0,0,0,0.42)),
+        url("assets/oven.jpg") center/cover no-repeat;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    .pizza-box {
+      max-width: 660px;
+      padding: 42px;
+      background: rgba(8,8,8,0.72);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .pizza-list {
+      margin-top: 26px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .pizza-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .pizza-row strong {
+      color: var(--ivory);
+    }
+
+    .pizza-row span {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .gallery {
+      background: var(--ivory);
+      color: var(--black);
+    }
+
+    .gallery .eyebrow {
+      color: var(--red);
+    }
+
+    .gallery .section-text {
+      color: #5f564a;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      grid-auto-rows: 260px;
+      gap: 16px;
+      margin-top: 42px;
+    }
+
+    .gallery-item {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+      background: #ddd;
+    }
+
+    .gallery-item:first-child {
+      grid-row: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.35s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .occasion-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 42px;
+    }
+
+    .occasion-card {
+      padding: 34px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .occasion-card h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: var(--gold);
+    }
+
+    .occasion-card p {
+      color: var(--muted);
+    }
+
+    .contact {
+      background:
+        radial-gradient(circle at bottom right, rgba(47,70,53,0.7), transparent 36%),
+        var(--black);
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--ivory);
+      color: var(--black);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-info {
+      padding: 46px;
+    }
+
+    .contact-info h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      line-height: 0.95;
+      margin-bottom: 22px;
+    }
+
+    .contact-info p {
+      color: #5e5548;
+      margin-bottom: 26px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .contact-list div {
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .contact-list strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .map-wrap {
+      min-height: 420px;
+      background: var(--black);
+    }
+
+    .map-frame {
+      min-height: 420px;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      filter: grayscale(18%) contrast(1.05);
+    }
+
+    footer {
+      padding: 36px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .nav-links {
+        display: none;
+      }
+
+      .split,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .features,
+      .occasion-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-item:first-child {
+        grid-row: span 1;
+        grid-column: span 2;
+      }
+
+      .pizza {
+        background-attachment: scroll;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container,
+      .hero-content {
+        width: min(100% - 26px, 1160px);
+      }
+
+      section {
+        padding: 76px 0;
+      }
+
+      .hero {
+        min-height: 92vh;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.5rem, 18vw, 5.5rem);
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .menu-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item:first-child {
+        grid-column: span 1;
+      }
+
+      .menu-card {
+        min-height: 330px;
+      }
+
+      .image-card {
+        min-height: 380px;
+      }
+
+      .pizza-box,
+      .contact-info {
+        padding: 28px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Piano Café Baszta",
+    "description": "Piano Café Baszta w Szczecinie. Kawa, pizza z pieca opalanego drewnem, lemoniady, wino i elegancka przestrzeń przy Baszcie.",
+    "servesCuisine": ["Kawa", "Pizza", "Lemoniady", "Wino"],
+    "url": "https://twojadomena.pl",
+    "telephone": "+48918101010",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Szczecin",
+      "addressCountry": "PL"
+    },
+    "hasMap": "https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7",
+    "priceRange": "$$"
+  }
+  </script>
+</head>
+
+<body>
+  <header>
+    <nav class="nav">
+      <a href="#" class="logo" aria-label="Piano Café Baszta">
+        <span>Baszta</span>
+        <span>Piano Café</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#o-nas">O miejscu</a>
+        <a href="#menu">Menu</a>
+        <a href="#pizza">Pizza</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#kontakt" class="nav-cta">Kontakt</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-inner">
+          <div class="eyebrow">Szczecin · przy Baszcie</div>
+          <h1>Piano Café <em>Baszta</em></h1>
+          <p>
+            Kawa, pizza z pieca opalanego drewnem, wino i elegancka przestrzeń,
+            w której spotykają się muzyka, szkło, zieleń i wyjątkowy klimat Szczecina.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#menu" class="btn btn-primary">Zobacz menu</a>
+            <a
+              href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-secondary"
+            >
+              Jak do nas trafić
+            </a>
+          </div>
+
+          <div class="hero-badges">
+            <span class="badge">Pizza z pieca</span>
+            <span class="badge">Fortepian w lokalu</span>
+            <span class="badge">Kawa i lemoniady</span>
+            <span class="badge">Wino i prosecco</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="o-nas">
+      <div class="container split">
+        <div>
+          <div class="eyebrow">O miejscu</div>
+          <h2 class="section-title">Kawiarnia, która ma własny rytm</h2>
+          <p class="section-text">
+            Piano Café Baszta to kameralna, przeszklona przestrzeń przy jednej
+            z najbardziej charakterystycznych baszt Szczecina. To miejsce na spokojną
+            kawę, lunch, wieczorną pizzę, kieliszek wina i spotkanie w otoczeniu zieleni.
+          </p>
+
+          <div class="features">
+            <article class="feature">
+              <span>🎹</span>
+              <h3>Fortepian i klimat</h3>
+              <p>Muzyczny charakter miejsca, który od razu zapada w pamięć.</p>
+            </article>
+
+            <article class="feature">
+              <span>🔥</span>
+              <h3>Pizza z pieca</h3>
+              <p>Ciasto wypiekane w piecu opalanym drewnem, z aromatem prawdziwego ognia.</p>
+            </article>
+
+            <article class="feature">
+              <span>🌿</span>
+              <h3>Przy Baszcie</h3>
+              <p>Szklany pawilon, zieleń i jedna z najciekawszych scenerii w mieście.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="image-card">
+          <img src="assets/piano.jpg" alt="Fortepian w Piano Café Baszta">
+          <div class="floating-note">
+            <strong>Piano Café</strong>
+            Miejsce, które łączy smak, elegancję i spokojny rytm spotkań.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Menu</div>
+            <h2 class="section-title">Od espresso po pizzę z ognia</h2>
+          </div>
+          <p class="section-text">
+            Proste, czytelne menu online. Kawa, herbata, lemoniady, napoje,
+            pizza, wino, prosecco i szampan.
+          </p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <img src="assets/menu-coffee.jpg" alt="Kawa w Piano Café Baszta">
+            <div class="menu-card-content">
+              <h3>Kawa i herbata</h3>
+              <p>Espresso, cappuccino, latte, americano oraz klasyczne herbaty.</p>
+              <div class="menu-items">
+                <span>Espresso</span>
+                <span>Latte</span>
+                <span>Cappuccino</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <img src="assets/menu-pizza.jpg" alt="Pizza z pieca opalanego drewnem">
+            <div class="menu-card-content">
+              <h3>Pizza</h3>
+              <p>Margherita, Parma, Prosciutto, Diavolo, Capricciosa, Trufla i więcej.</p>
+              <div class="menu-items">
+                <span>Ø 32 cm</span>
+                <span>Dla dzieci</span>
+                <span>Z pieca</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <img src="assets/interior.jpg" alt="Wnętrze kawiarni Baszta">
+            <div class="menu-card-content">
+              <h3>Lemoniady</h3>
+              <p>Cytrynowa, truskawkowa oraz mojito serwowana na Sprite.</p>
+              <div class="menu-items">
+                <span>Cytrynowa</span>
+                <span>Truskawkowa</span>
+                <span>Mojito</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <img src="assets/cafe-exterior.jpg" alt="Piano Café Baszta z zewnątrz">
+            <div class="menu-card-content">
+              <h3>Wino</h3>
+              <p>Wino białe, czerwone, musujące, prosecco i szampan.</p>
+              <div class="menu-items">
+                <span>Prosecco</span>
+                <span>Wino</span>
+                <span>Szampan</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pizza" class="pizza">
+      <div class="container">
+        <div class="pizza-box">
+          <div class="eyebrow">Pizza z pieca opalanego drewnem</div>
+          <h2 class="section-title">Pizza prosto z ognia</h2>
+          <p class="section-text">
+            Chrupiące ciasto, klasyczne składniki i piec opalany drewnem.
+            To smak, który pasuje do lunchu, wieczornego spotkania i kieliszka wina.
+          </p>
+
+          <div class="pizza-list">
+            <div class="pizza-row">
+              <strong>Margherita</strong>
+              <span>30 zł</span>
+            </div>
+            <div class="pizza-row">
+              <strong>Parma</strong>
+              <span>45 zł</span>
+            </div>
+            <div class="pizza-row">
+              <strong>Prosciutto</strong>
+              <span>40 zł</span>
+            </div>
+            <div class="pizza-row">
+              <strong>Diavolo</strong>
+              <span>50 zł</span>
+            </div>
+            <div class="pizza-row">
+              <strong>Trufla</strong>
+              <span>90 zł</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeria" class="gallery">
+      <div class="container">
+        <div class="eyebrow">Galeria</div>
+        <h2 class="section-title">Zajrzyj do środka</h2>
+        <p class="section-text">
+          Szklany pawilon, zieleń Baszty, fortepian, piec opalany drewnem
+          i przestrzeń, która dobrze wygląda o każdej porze dnia.
+        </p>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="assets/cafe-exterior.jpg" alt="Zewnętrzna część Piano Café Baszta">
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/piano.jpg" alt="Fortepian w kawiarni">
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/oven.jpg" alt="Piec opalany drewnem">
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/interior.jpg" alt="Wnętrze Piano Café Baszta">
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/menu-pizza.jpg" alt="Menu pizzy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="eyebrow">Dla kogo</div>
+        <h2 class="section-title">Na kawę, spotkanie i wieczór przy winie</h2>
+        <p class="section-text">
+          Baszta sprawdza się jako miejsce na szybkie espresso, rodzinny lunch,
+          spotkanie biznesowe albo spokojny wieczór w eleganckiej scenerii.
+        </p>
+
+        <div class="occasion-grid">
+          <article class="occasion-card">
+            <h3>Spotkania biznesowe</h3>
+            <p>Eleganckie, spokojne miejsce na rozmowę przy kawie, pizzy lub lunchu.</p>
+          </article>
+
+          <article class="occasion-card">
+            <h3>Randki i wieczory</h3>
+            <p>Wino, pizza, muzyczny klimat i widok na zieloną Basztę.</p>
+          </article>
+
+          <article class="occasion-card">
+            <h3>Rodzinny lunch</h3>
+            <p>Pizza, lemoniady, kawa i wygodna przestrzeń w wyjątkowym miejscu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div class="contact-info">
+            <div class="eyebrow">Kontakt i lokalizacja</div>
+            <h2>Znajdziesz nas przy Baszcie</h2>
+            <p>
+              Wpadnij na kawę, zostań na pizzę z pieca opalanego drewnem
+              i wróć wieczorem na kieliszek wina w wyjątkowej przestrzeni Piano Café Baszta.
+            </p>
+
+            <div class="contact-list">
+              <div>
+                <strong>Piano Café Baszta</strong>
+                Szczecin · przy Baszcie
+              </div>
+
+              <div>
+                <strong>Lokalizacja Google Maps</strong>
+                <a
+                  href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Otwórz lokalizację w Google Maps
+                </a>
+              </div>
+
+              <div>
+                <strong>Telefon</strong>
+                <a href="tel:+48918101010">+48 91 810 10 10</a>
+              </div>
+
+              <div>
+                <strong>Godziny otwarcia</strong>
+                Codziennie · do uzupełnienia aktualnymi godzinami
+              </div>
+
+              <div>
+                <strong>Social media</strong>
+                Instagram · Facebook
+              </div>
+            </div>
+
+            <div class="hero-actions">
+              <a
+                href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-primary"
+              >
+                Prowadź mnie
+              </a>
+
+              <a href="tel:+48918101010" class="btn btn-secondary">
+                Zadzwoń
+              </a>
+            </div>
+          </div>
+
+          <div class="map-wrap">
+            <iframe
+              class="map-frame"
+              title="Mapa lokalizacji Piano Café Baszta w Szczecinie"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Piano%20Cafe%20Baszta%20Szczecin&output=embed">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Piano Café Baszta. Wszystkie prawa zastrzeżone.</p>
+      <p>
+        <a
+          href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7"
+          target="_blank"
+          rel="noopener"
+        >
+          Szczecin · przy Baszcie
+        </a>
+        · Kawa · Pizza · Wino · Piano Café
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
