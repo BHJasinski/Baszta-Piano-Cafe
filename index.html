@@ -13,26 +13,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
   <style>
     :root {
-      --black: #080808;
-      --black-soft: #121212;
+      --black: #070707;
+      --black-soft: #10100f;
+      --glass: rgba(255, 255, 255, 0.075);
+      --glass-strong: rgba(255, 255, 255, 0.12);
+      --glass-dark: rgba(8, 8, 8, 0.56);
       --ivory: #f4eddf;
       --ivory-dark: #e3d6bf;
       --gold: #c8a96a;
       --green: #2f4635;
-      --green-dark: #1f2f25;
+      --green-dark: #17241d;
       --red: #7d2f25;
       --text: #f8f1e7;
-      --muted: #bfb5a5;
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+      --muted: #c5b9a7;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+      --shadow-soft: 0 18px 46px rgba(0, 0, 0, 0.22);
       --radius-lg: 28px;
       --radius-md: 18px;
       --radius-sm: 12px;
+      --nav-height: 82px;
     }
 
     * {
@@ -43,13 +48,30 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
       font-family: "Inter", sans-serif;
-      background: var(--black);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(47, 70, 53, 0.42), transparent 26rem),
+        radial-gradient(circle at 100% 35%, rgba(200, 169, 106, 0.10), transparent 24rem),
+        var(--black);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      z-index: -1;
+      background-image: linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
     }
 
     img {
@@ -62,6 +84,12 @@
       text-decoration: none;
     }
 
+    section {
+      position: relative;
+      padding: 110px 0;
+      scroll-margin-top: 92px;
+    }
+
     .container {
       width: min(1160px, calc(100% - 40px));
       margin: 0 auto;
@@ -72,7 +100,7 @@
       text-transform: uppercase;
       letter-spacing: 0.18em;
       font-size: 0.78rem;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 14px;
     }
 
@@ -81,12 +109,31 @@
       font-size: clamp(2.4rem, 5vw, 4.4rem);
       line-height: 0.95;
       margin-bottom: 22px;
+      letter-spacing: -0.035em;
     }
 
     .section-text {
       color: var(--muted);
       font-size: 1.05rem;
       max-width: 680px;
+    }
+
+    .glass-panel,
+    .feature,
+    .menu-category,
+    .occasion-card,
+    .pizza-box,
+    .floating-note,
+    .contact-card,
+    .hero-logo,
+    .logo-image {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.13), rgba(255,255,255,0.035) 52%, rgba(200,169,106,0.055)),
+        rgba(12, 12, 12, 0.54);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px) saturate(1.24);
+      -webkit-backdrop-filter: blur(22px) saturate(1.24);
     }
 
     .btn {
@@ -97,14 +144,16 @@
       min-height: 48px;
       padding: 0 24px;
       border-radius: 999px;
-      font-weight: 700;
-      transition: 0.25s ease;
+      font-weight: 800;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     .btn-primary {
       background: var(--gold);
       color: var(--black);
+      box-shadow: 0 12px 30px rgba(200, 169, 106, 0.16);
     }
 
     .btn-primary:hover {
@@ -115,7 +164,9 @@
     .btn-secondary {
       border: 1px solid rgba(244, 237, 223, 0.28);
       color: var(--text);
+      background: rgba(255,255,255,0.06);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .btn-secondary:hover {
@@ -128,68 +179,163 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 50;
+      z-index: 100;
       width: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.82), rgba(0,0,0,0));
+      padding: 14px 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.76), rgba(0,0,0,0.34), transparent);
     }
 
-    .nav {
+    .nav-shell {
       width: min(1220px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 22px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
+      padding: 8px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 26px;
+      background: rgba(9, 9, 9, 0.46);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.26);
+      backdrop-filter: blur(22px) saturate(1.2);
+      -webkit-backdrop-filter: blur(22px) saturate(1.2);
     }
-
-    .logo {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-
-    .logo span:first-child {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .logo span:last-child {
-      font-size: 0.72rem;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.28em;
-    }
-
 
     .logo-image {
       position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 178px;
-      height: 64px;
-      padding: 8px 14px;
-      border: 1px solid rgba(255,255,255,0.10);
+      flex: 0 0 auto;
+      width: 156px;
+      height: 54px;
+      padding: 7px 13px;
       border-radius: 18px;
-      background: rgba(0,0,0,0.28);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.24);
+      overflow: hidden;
       transition: 0.25s ease;
     }
 
-    .logo-image:hover {
-      border-color: rgba(200,169,106,0.55);
-      transform: translateY(-1px);
-      box-shadow: 0 18px 48px rgba(0,0,0,0.34);
+    .logo-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.16), transparent);
+      transform: translateX(-125%);
+      transition: transform 0.55s ease;
+    }
+
+    .logo-image:hover::after {
+      transform: translateX(125%);
     }
 
     .logo-image img {
       width: 100%;
-      max-height: 46px;
+      max-height: 39px;
       object-fit: contain;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.38));
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.42));
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: rgba(255,255,255,0.84);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 14px;
+      border-radius: 999px;
+      transition: 0.22s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .nav-cta {
+      border: 1px solid rgba(200,169,106,0.56);
+      color: var(--gold);
+      background: rgba(200,169,106,0.08);
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      cursor: pointer;
+      position: relative;
+      touch-action: manipulation;
+    }
+
+    .nav-toggle span {
+      position: absolute;
+      left: 13px;
+      right: 13px;
+      height: 2px;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform .25s ease, opacity .25s ease, top .25s ease;
+    }
+
+    .nav-toggle span:nth-child(1) { top: 16px; }
+    .nav-toggle span:nth-child(2) { top: 23px; }
+    .nav-toggle span:nth-child(3) { top: 30px; }
+    body.nav-open .nav-toggle span:nth-child(1) { top: 23px; transform: rotate(45deg); }
+    body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    body.nav-open .nav-toggle span:nth-child(3) { top: 23px; transform: rotate(-45deg); }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.86) 0%, rgba(0,0,0,0.62) 42%, rgba(0,0,0,0.20) 100%),
+        url("assets/hero.png") center/cover no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 88px 88px;
+      opacity: 0.26;
+      mask-image: linear-gradient(90deg, black, transparent 70%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 190px;
+      background: linear-gradient(to top, var(--black), transparent);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(1220px, calc(100% - 40px));
+      padding-top: 130px;
+      padding-bottom: 62px;
+    }
+
+    .hero-inner {
+      max-width: 760px;
     }
 
     .hero-logo {
@@ -199,11 +345,8 @@
       width: min(260px, 78vw);
       padding: 18px 24px;
       margin-bottom: 22px;
-      border: 1px solid rgba(255,255,255,0.14);
       border-radius: 26px;
-      background: rgba(0,0,0,0.34);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.32);
+      overflow: hidden;
     }
 
     .hero-logo img {
@@ -212,77 +355,13 @@
       filter: drop-shadow(0 10px 24px rgba(0,0,0,0.48));
     }
 
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .footer-brand img {
-      width: 96px;
-      height: auto;
-      opacity: 0.92;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      color: rgba(255,255,255,0.84);
-      font-size: 0.94rem;
-    }
-
-    .nav-links a {
-      transition: 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--gold);
-    }
-
-    .nav-cta {
-      padding: 10px 17px;
-      border: 1px solid rgba(200,169,106,0.6);
-      border-radius: 999px;
-      color: var(--gold);
-    }
-
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.62) 42%, rgba(0,0,0,0.18) 100%),
-        url("assets/hero.png") center/cover no-repeat;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0;
-      height: 180px;
-      background: linear-gradient(to top, var(--black), transparent);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      width: min(1220px, calc(100% - 40px));
-      padding-top: 80px;
-    }
-
-    .hero-inner {
-      max-width: 760px;
-    }
-
     .hero h1 {
       font-family: "Cormorant Garamond", serif;
       font-size: clamp(4rem, 11vw, 8.5rem);
       line-height: 0.82;
-      letter-spacing: -0.05em;
+      letter-spacing: -0.055em;
       margin-bottom: 26px;
+      text-wrap: balance;
     }
 
     .hero h1 em {
@@ -292,7 +371,7 @@
 
     .hero p {
       max-width: 660px;
-      color: rgba(255,255,255,0.82);
+      color: rgba(255,255,255,0.84);
       font-size: clamp(1.05rem, 2vw, 1.28rem);
       margin-bottom: 32px;
     }
@@ -301,7 +380,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-bottom: 46px;
+      margin-bottom: 36px;
     }
 
     .hero-badges {
@@ -311,17 +390,14 @@
     }
 
     .badge {
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(12px);
-      color: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: rgba(255,255,255,0.86);
       padding: 10px 14px;
       border-radius: 999px;
       font-size: 0.9rem;
-    }
-
-    section {
-      padding: 110px 0;
     }
 
     .split {
@@ -335,9 +411,9 @@
       position: relative;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: var(--shadow);
       min-height: 500px;
       background: var(--black-soft);
+      box-shadow: var(--shadow);
     }
 
     .image-card img {
@@ -352,7 +428,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.45), transparent 58%);
+      background: linear-gradient(to top, rgba(0,0,0,0.52), transparent 58%);
     }
 
     .floating-note {
@@ -362,10 +438,7 @@
       z-index: 2;
       width: min(330px, calc(100% - 48px));
       padding: 22px;
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 20px;
-      background: rgba(0,0,0,0.52);
-      backdrop-filter: blur(14px);
+      border-radius: 22px;
     }
 
     .floating-note strong {
@@ -382,22 +455,45 @@
     }
 
     .feature {
-      border: 1px solid rgba(255,255,255,0.1);
-      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      position: relative;
+      overflow: hidden;
       padding: 24px;
       border-radius: var(--radius-md);
     }
 
+    .feature::after,
+    .occasion-card::after,
+    .menu-category::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.22;
+    }
+
     .feature span {
+      position: relative;
+      z-index: 1;
       display: inline-grid;
       place-items: center;
       width: 42px;
       height: 42px;
-      background: rgba(200,169,106,0.12);
+      background: rgba(200,169,106,0.14);
       color: var(--gold);
       border-radius: 50%;
       margin-bottom: 16px;
       font-size: 1.25rem;
+      border: 1px solid rgba(200,169,106,0.18);
+    }
+
+    .feature h3,
+    .feature p {
+      position: relative;
+      z-index: 1;
     }
 
     .feature h3 {
@@ -411,9 +507,23 @@
     }
 
     .menu-section {
+      overflow: hidden;
       background:
-        radial-gradient(circle at top left, rgba(200,169,106,0.14), transparent 32%),
+        radial-gradient(circle at 10% 5%, rgba(200,169,106,0.16), transparent 28rem),
+        radial-gradient(circle at 100% 20%, rgba(47,70,53,0.5), transparent 26rem),
         linear-gradient(180deg, var(--black), #10130f);
+    }
+
+    .menu-section::before {
+      content: "♪";
+      position: absolute;
+      top: 72px;
+      right: min(6vw, 80px);
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(8rem, 18vw, 18rem);
+      line-height: 1;
+      color: rgba(200,169,106,0.08);
+      pointer-events: none;
     }
 
     .section-head {
@@ -439,11 +549,6 @@
       overflow: hidden;
       padding: 30px;
       border-radius: var(--radius-lg);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.032)),
-        rgba(18,18,18,0.96);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: var(--shadow);
     }
 
     .menu-category::before {
@@ -454,12 +559,13 @@
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      background: rgba(200,169,106,0.10);
+      background: rgba(200,169,106,0.12);
       pointer-events: none;
     }
 
     .menu-category h3 {
       position: relative;
+      z-index: 1;
       font-family: "Cormorant Garamond", serif;
       font-size: clamp(2rem, 3vw, 2.7rem);
       line-height: 1;
@@ -469,6 +575,7 @@
 
     .menu-category .menu-note {
       position: relative;
+      z-index: 1;
       color: var(--muted);
       font-size: 0.92rem;
       margin-bottom: 22px;
@@ -476,6 +583,7 @@
 
     .menu-list {
       position: relative;
+      z-index: 1;
       display: grid;
       gap: 13px;
     }
@@ -486,7 +594,7 @@
       gap: 18px;
       align-items: baseline;
       padding-bottom: 12px;
-      border-bottom: 1px dashed rgba(255,255,255,0.18);
+      border-bottom: 1px dashed rgba(255,255,255,0.20);
     }
 
     .menu-line strong {
@@ -497,7 +605,7 @@
     .menu-line small {
       display: block;
       margin-top: 3px;
-      color: rgba(191,181,165,0.86);
+      color: rgba(197,185,167,0.9);
       font-size: 0.82rem;
       line-height: 1.45;
     }
@@ -519,11 +627,13 @@
     }
 
     .menu-disclaimer {
+      position: relative;
+      z-index: 1;
       margin-top: 26px;
       padding: 18px 20px;
-      border: 1px solid rgba(200,169,106,0.26);
+      border: 1px solid rgba(200,169,106,0.28);
       border-radius: var(--radius-md);
-      color: rgba(255,255,255,0.76);
+      color: rgba(255,255,255,0.78);
       background: rgba(200,169,106,0.08);
       font-size: 0.9rem;
     }
@@ -536,14 +646,31 @@
       position: relative;
     }
 
+    .pizza::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 22% 30%, rgba(200,169,106,0.08), transparent 22rem);
+      pointer-events: none;
+    }
+
     .pizza-box {
+      position: relative;
+      z-index: 1;
       max-width: 660px;
       padding: 42px;
-      background: rgba(8,8,8,0.72);
-      border: 1px solid rgba(255,255,255,0.14);
       border-radius: var(--radius-lg);
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadow);
+    }
+
+    .pizza-box::before {
+      content: "♬";
+      position: absolute;
+      right: 28px;
+      top: 18px;
+      color: rgba(200,169,106,0.20);
+      font-size: 4rem;
+      line-height: 1;
+      font-family: "Cormorant Garamond", serif;
     }
 
     .pizza-list {
@@ -570,7 +697,9 @@
     }
 
     .gallery {
-      background: var(--ivory);
+      background:
+        radial-gradient(circle at 90% 20%, rgba(47,70,53,0.12), transparent 22rem),
+        var(--ivory);
       color: var(--black);
     }
 
@@ -595,6 +724,7 @@
       overflow: hidden;
       box-shadow: 0 18px 40px rgba(0,0,0,0.14);
       background: #ddd;
+      border: 1px solid rgba(255,255,255,0.55);
     }
 
     .gallery-item:first-child {
@@ -620,13 +750,15 @@
     }
 
     .occasion-card {
+      position: relative;
+      overflow: hidden;
       padding: 34px;
       border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
-      border: 1px solid rgba(255,255,255,0.1);
     }
 
     .occasion-card h3 {
+      position: relative;
+      z-index: 1;
       font-family: "Cormorant Garamond", serif;
       font-size: 2rem;
       margin-bottom: 12px;
@@ -634,12 +766,15 @@
     }
 
     .occasion-card p {
+      position: relative;
+      z-index: 1;
       color: var(--muted);
     }
 
     .contact {
       background:
-        radial-gradient(circle at bottom right, rgba(47,70,53,0.7), transparent 36%),
+        radial-gradient(circle at bottom right, rgba(47,70,53,0.70), transparent 36%),
+        radial-gradient(circle at 12% 20%, rgba(200,169,106,0.07), transparent 25rem),
         var(--black);
     }
 
@@ -648,13 +783,15 @@
       grid-template-columns: 0.9fr 1.1fr;
       overflow: hidden;
       border-radius: var(--radius-lg);
-      background: var(--ivory);
-      color: var(--black);
-      box-shadow: var(--shadow);
+      color: var(--text);
     }
 
     .contact-info {
       padding: 46px;
+      background: rgba(244,237,223,0.84);
+      color: var(--black);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .contact-info h2 {
@@ -662,6 +799,7 @@
       font-size: clamp(2.4rem, 4vw, 4rem);
       line-height: 0.95;
       margin-bottom: 22px;
+      letter-spacing: -0.03em;
     }
 
     .contact-info p {
@@ -683,6 +821,12 @@
     .contact-list strong {
       display: block;
       margin-bottom: 3px;
+    }
+
+    .contact .btn-secondary {
+      color: var(--black);
+      border-color: rgba(0,0,0,0.20);
+      background: rgba(255,255,255,0.44);
     }
 
     .map-wrap {
@@ -713,11 +857,19 @@
       font-size: 0.9rem;
     }
 
-    @media (max-width: 980px) {
-      .nav-links {
-        display: none;
-      }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
+    .footer-brand img {
+      width: 88px;
+      height: auto;
+      opacity: 0.92;
+    }
+
+    @media (max-width: 980px) {
       .split,
       .contact-card {
         grid-template-columns: 1fr;
@@ -754,85 +906,70 @@
       }
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 760px) {
+      :root { --nav-height: 72px; }
+
+      header {
+        padding: 10px 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.92), rgba(0,0,0,0.65), transparent);
+      }
+
+      .nav-shell {
+        width: min(100% - 22px, 1220px);
+        border-radius: 22px;
+        padding: 7px;
+      }
+
       .logo-image {
-        width: 136px;
-        height: 54px;
-        padding: 7px 11px;
+        width: 124px;
+        height: 46px;
+        padding: 6px 10px;
         border-radius: 15px;
       }
 
       .logo-image img {
-        max-height: 38px;
+        max-height: 33px;
       }
 
-      .hero-logo {
-        width: min(220px, 76vw);
-        padding: 14px 18px;
+      .nav-toggle {
+        display: inline-flex;
       }
 
-      .container,
-      .hero-content {
-        width: min(100% - 26px, 1160px);
+      .nav-links {
+        position: fixed;
+        left: 11px;
+        right: 11px;
+        top: 78px;
+        display: grid;
+        gap: 8px;
+        padding: 14px;
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 24px;
+        background: rgba(8, 8, 8, 0.86);
+        box-shadow: 0 22px 60px rgba(0,0,0,0.42);
+        backdrop-filter: blur(24px) saturate(1.22);
+        -webkit-backdrop-filter: blur(24px) saturate(1.22);
+        transform: translateY(-12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .22s ease, transform .22s ease;
       }
 
-      section {
-        padding: 76px 0;
+      body.nav-open .nav-links {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
       }
 
-      .hero {
-        min-height: 92vh;
+      .nav-links a {
+        justify-content: center;
+        min-height: 48px;
+        background: rgba(255,255,255,0.06);
+        font-weight: 800;
       }
 
-      .hero h1 {
-        font-size: clamp(3.5rem, 18vw, 5.5rem);
-      }
-
-      .section-head {
-        display: block;
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-item:first-child {
-        grid-column: span 1;
-      }
-
-      .image-card {
-        min-height: 380px;
-      }
-
-      .pizza-box,
-      .contact-info {
-        padding: 28px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    /* Poprawki produkcyjne: ścieżka logo, czytelniejszy header i lepszy mobile */
-    .logo-image {
-      flex: 0 0 auto;
-    }
-
-    .logo-image img,
-    .hero-logo img,
-    .footer-brand img {
-      display: block;
-    }
-
-    @media (max-width: 760px) {
-      header {
-        background: linear-gradient(to bottom, rgba(0,0,0,0.92), rgba(0,0,0,0.68), rgba(0,0,0,0));
-      }
-
-      .nav {
-        padding: 12px 0;
+      .nav-cta {
+        background: rgba(200,169,106,0.16) !important;
       }
 
       .hero {
@@ -841,12 +978,29 @@
       }
 
       .hero-content {
-        padding-top: 96px;
+        width: min(100% - 24px, 1220px);
+        padding-top: 112px;
         padding-bottom: 56px;
+      }
+
+      .hero-logo {
+        width: min(190px, 64vw);
+        padding: 12px 16px;
+        margin-bottom: 17px;
+        border-radius: 20px;
       }
 
       .hero h1 {
         max-width: 10ch;
+        font-size: clamp(3.05rem, 16vw, 4.6rem);
+        line-height: 0.88;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 0.98rem;
+        line-height: 1.55;
+        margin-bottom: 24px;
       }
 
       .hero-actions {
@@ -855,6 +1009,7 @@
 
       .hero-actions .btn {
         flex: 1 1 170px;
+        min-height: 50px;
       }
 
       .badge {
@@ -862,8 +1017,42 @@
         padding: 8px 11px;
       }
 
+      .container {
+        width: min(100% - 24px, 1160px);
+      }
+
+      section {
+        padding: 76px 0;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-title {
+        font-size: clamp(2.25rem, 12vw, 3.25rem);
+      }
+
+      .section-text {
+        font-size: 0.98rem;
+      }
+
+      .features {
+        gap: 14px;
+      }
+
+      .feature,
+      .menu-category,
+      .occasion-card {
+        border-radius: 22px;
+      }
+
       .menu-category {
-        padding: 24px;
+        padding: 23px;
+      }
+
+      .menu-category h3 {
+        font-size: 2rem;
       }
 
       .menu-line {
@@ -879,6 +1068,24 @@
         font-size: 0.78rem;
       }
 
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 220px;
+      }
+
+      .gallery-item:first-child {
+        grid-column: span 1;
+      }
+
+      .image-card {
+        min-height: 380px;
+      }
+
+      .pizza-box,
+      .contact-info {
+        padding: 28px;
+      }
+
       .contact-card {
         border-radius: 22px;
       }
@@ -887,65 +1094,10 @@
       .map-frame {
         min-height: 330px;
       }
-    }
 
-    @media (max-width: 430px) {
-      .container,
-      .hero-content {
-        width: min(100% - 24px, 1160px);
-      }
-
-      .logo-image {
-        width: 118px;
-        height: 44px;
-        padding: 6px 9px;
-        border-radius: 14px;
-      }
-
-      .logo-image img {
-        max-height: 32px;
-      }
-
-      .hero-logo {
-        width: min(170px, 64vw);
-        padding: 12px 15px;
-        margin-bottom: 16px;
-        border-radius: 20px;
-      }
-
-      .hero h1 {
-        font-size: clamp(3rem, 16vw, 4.25rem);
-        line-height: 0.88;
-        margin-bottom: 20px;
-      }
-
-      .hero p {
-        font-size: 0.98rem;
-        line-height: 1.55;
-        margin-bottom: 24px;
-      }
-
-      .section-title {
-        font-size: clamp(2.25rem, 12vw, 3.25rem);
-      }
-
-      .section-text {
-        font-size: 0.98rem;
-      }
-
-      .menu-category h3 {
-        font-size: 2rem;
-      }
-
-      .menu-board,
-      .menu-columns,
-      .features,
-      .occasion-grid {
-        gap: 16px;
-      }
-
-      .gallery-grid {
-        grid-auto-rows: 220px;
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .footer-brand {
@@ -957,6 +1109,52 @@
       }
     }
 
+    @media (max-width: 390px) {
+      .menu-category {
+        padding: 20px;
+      }
+
+      .menu-line {
+        gap: 8px;
+      }
+
+      .menu-line span {
+        font-size: 0.9rem;
+      }
+
+      .hero-actions .btn {
+        flex-basis: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .glass-panel,
+      .feature,
+      .menu-category,
+      .occasion-card,
+      .pizza-box,
+      .floating-note,
+      .contact-card,
+      .hero-logo,
+      .logo-image,
+      .nav-shell,
+      .nav-links {
+        background: rgba(16,16,16,0.94);
+      }
+
+      .contact-info {
+        background: var(--ivory);
+      }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -966,7 +1164,7 @@
     "name": "Piano Café Baszta",
     "description": "Piano Café Baszta w Szczecinie. Kawa, pizza z pieca opalanego drewnem, lemoniady, wino i elegancka przestrzeń przy Baszcie.",
     "servesCuisine": ["Kawa", "Pizza", "Lemoniady", "Wino"],
-    "url": "https://twojadomena.pl",
+    "url": "https://bhjasinski.github.io/Baszta-Piano-Cafe/",
     "telephone": "+48918101010",
     "address": {
       "@type": "PostalAddress",
@@ -981,12 +1179,18 @@
 
 <body>
   <header>
-    <nav class="nav">
-      <a href="#" class="logo-image" aria-label="Piano Café Baszta">
+    <nav class="nav-shell" aria-label="Główna nawigacja">
+      <a href="#" class="logo-image" aria-label="Piano Café Baszta, strona główna">
         <img src="assets/logo.png" alt="Piano Café Baszta">
       </a>
 
-      <div class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Otwórz menu" aria-controls="nav-links" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
         <a href="#o-nas">O miejscu</a>
         <a href="#menu">Menu</a>
         <a href="#pizza">Pizza</a>
@@ -1022,7 +1226,7 @@
             </a>
           </div>
 
-          <div class="hero-badges">
+          <div class="hero-badges" aria-label="Najważniejsze cechy lokalu">
             <span class="badge">Pizza z pieca</span>
             <span class="badge">Fortepian w lokalu</span>
             <span class="badge">Kawa i lemoniady</span>
@@ -1147,41 +1351,17 @@
             <p class="menu-note">Rozmiar normalny Ø 32 cm. Minipizza dla dzieci Ø 20 cm.</p>
             <div class="menu-columns">
               <div class="menu-list">
-                <div class="menu-line">
-                  <strong>Margherita<small>sos pomidorowy, mozzarella, bazylia</small></strong>
-                  <span>30 zł</span>
-                </div>
-                <div class="menu-line">
-                  <strong>Parma<small>sos pomidorowy, mozzarella, pomidory cherry, parmezan, rukola</small></strong>
-                  <span>45 zł</span>
-                </div>
-                <div class="menu-line">
-                  <strong>Prosciutto<small>sos pomidorowy, mozzarella, szynka prosciutto, świeża bazylia</small></strong>
-                  <span>40 zł</span>
-                </div>
-                <div class="menu-line">
-                  <strong>Diavolo<small>sos pomidorowy, mozzarella, salami chorizo, cebula, jalapeño chilli, świeża bazylia</small></strong>
-                  <span>50 zł</span>
-                </div>
-                <div class="menu-line">
-                  <strong>Capricciosa<small>sos pomidorowy, mozzarella, szynka, pieczarki, świeża bazylia</small></strong>
-                  <span>40 zł</span>
-                </div>
+                <div class="menu-line"><strong>Margherita<small>sos pomidorowy, mozzarella, bazylia</small></strong><span>30 zł</span></div>
+                <div class="menu-line"><strong>Parma<small>sos pomidorowy, mozzarella, pomidory cherry, parmezan, rukola</small></strong><span>45 zł</span></div>
+                <div class="menu-line"><strong>Prosciutto<small>sos pomidorowy, mozzarella, szynka prosciutto, świeża bazylia</small></strong><span>40 zł</span></div>
+                <div class="menu-line"><strong>Diavolo<small>sos pomidorowy, mozzarella, salami chorizo, cebula, jalapeño chilli, świeża bazylia</small></strong><span>50 zł</span></div>
+                <div class="menu-line"><strong>Capricciosa<small>sos pomidorowy, mozzarella, szynka, pieczarki, świeża bazylia</small></strong><span>40 zł</span></div>
               </div>
 
               <div class="menu-list">
-                <div class="menu-line">
-                  <strong>Marinara<small>sos pomidorowy, czosnek, rozmaryn, świeża bazylia</small></strong>
-                  <span>30 zł</span>
-                </div>
-                <div class="menu-line">
-                  <strong>Salami<small>sos pomidorowy, mozzarella, salami, świeża bazylia</small></strong>
-                  <span>45 zł</span>
-                </div>
-                <div class="menu-line">
-                  <strong>Trufla<small>sos śmietanowy, mozzarella, trufla</small></strong>
-                  <span>90 zł</span>
-                </div>
+                <div class="menu-line"><strong>Marinara<small>sos pomidorowy, czosnek, rozmaryn, świeża bazylia</small></strong><span>30 zł</span></div>
+                <div class="menu-line"><strong>Salami<small>sos pomidorowy, mozzarella, salami, świeża bazylia</small></strong><span>45 zł</span></div>
+                <div class="menu-line"><strong>Trufla<small>sos śmietanowy, mozzarella, trufla</small></strong><span>90 zł</span></div>
                 <div class="menu-line"><strong>Grissini<small>włoskie gorące pieczywo w postaci paluszków</small></strong><span>15 zł</span></div>
                 <div class="menu-line"><strong>Focaccia<small>włoskie gorące pieczywo na bazie placka do pizzy, czosnek i oliwa z oliwek</small></strong><span>20 zł</span></div>
                 <div class="menu-line"><strong>Minipizza dla dzieci<small>Margherita albo Capricciosa</small></strong><span>20 zł</span></div>
@@ -1208,26 +1388,11 @@
           </p>
 
           <div class="pizza-list">
-            <div class="pizza-row">
-              <strong>Margherita</strong>
-              <span>30 zł</span>
-            </div>
-            <div class="pizza-row">
-              <strong>Parma</strong>
-              <span>45 zł</span>
-            </div>
-            <div class="pizza-row">
-              <strong>Prosciutto</strong>
-              <span>40 zł</span>
-            </div>
-            <div class="pizza-row">
-              <strong>Diavolo</strong>
-              <span>50 zł</span>
-            </div>
-            <div class="pizza-row">
-              <strong>Trufla</strong>
-              <span>90 zł</span>
-            </div>
+            <div class="pizza-row"><strong>Margherita</strong><span>30 zł</span></div>
+            <div class="pizza-row"><strong>Parma</strong><span>45 zł</span></div>
+            <div class="pizza-row"><strong>Prosciutto</strong><span>40 zł</span></div>
+            <div class="pizza-row"><strong>Diavolo</strong><span>50 zł</span></div>
+            <div class="pizza-row"><strong>Trufla</strong><span>90 zł</span></div>
           </div>
         </div>
       </div>
@@ -1243,21 +1408,10 @@
         </p>
 
         <div class="gallery-grid">
-          <figure class="gallery-item">
-            <img src="assets/cafe-exterior.png" alt="Zewnętrzna część Piano Café Baszta">
-          </figure>
-
-          <figure class="gallery-item">
-            <img src="assets/piano.png" alt="Fortepian w kawiarni">
-          </figure>
-
-          <figure class="gallery-item">
-            <img src="assets/oven.png" alt="Piec opalany drewnem">
-          </figure>
-
-          <figure class="gallery-item">
-            <img src="assets/interior.png" alt="Wnętrze Piano Café Baszta">
-          </figure>
+          <figure class="gallery-item"><img src="assets/cafe-exterior.png" alt="Zewnętrzna część Piano Café Baszta"></figure>
+          <figure class="gallery-item"><img src="assets/piano.png" alt="Fortepian w kawiarni"></figure>
+          <figure class="gallery-item"><img src="assets/oven.png" alt="Piec opalany drewnem"></figure>
+          <figure class="gallery-item"><img src="assets/interior.png" alt="Wnętrze Piano Café Baszta"></figure>
         </div>
       </div>
     </section>
@@ -1302,51 +1456,19 @@
             </p>
 
             <div class="contact-list">
-              <div>
-                <strong>Piano Café Baszta</strong>
-                Szczecin · przy Baszcie
-              </div>
-
+              <div><strong>Piano Café Baszta</strong>Szczecin · przy Baszcie</div>
               <div>
                 <strong>Lokalizacja Google Maps</strong>
-                <a
-                  href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Otwórz lokalizację w Google Maps
-                </a>
+                <a href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7" target="_blank" rel="noopener">Otwórz lokalizację w Google Maps</a>
               </div>
-
-              <div>
-                <strong>Telefon</strong>
-                <a href="tel:+48918101010">+48 91 810 10 10</a>
-              </div>
-
-              <div>
-                <strong>Godziny otwarcia</strong>
-                Codziennie · do uzupełnienia aktualnymi godzinami
-              </div>
-
-              <div>
-                <strong>Social media</strong>
-                Instagram · Facebook
-              </div>
+              <div><strong>Telefon</strong><a href="tel:+48918101010">+48 91 810 10 10</a></div>
+              <div><strong>Godziny otwarcia</strong>Codziennie · do uzupełnienia aktualnymi godzinami</div>
+              <div><strong>Social media</strong>Instagram · Facebook</div>
             </div>
 
             <div class="hero-actions">
-              <a
-                href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7"
-                target="_blank"
-                rel="noopener"
-                class="btn btn-primary"
-              >
-                Prowadź mnie
-              </a>
-
-              <a href="tel:+48918101010" class="btn btn-secondary">
-                Zadzwoń
-              </a>
+              <a href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7" target="_blank" rel="noopener" class="btn btn-primary">Prowadź mnie</a>
+              <a href="tel:+48918101010" class="btn btn-secondary">Zadzwoń</a>
             </div>
           </div>
 
@@ -1372,20 +1494,32 @@
         <p>© <span id="year"></span> Piano Café Baszta. Wszystkie prawa zastrzeżone.</p>
       </div>
       <p>
-        <a
-          href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7"
-          target="_blank"
-          rel="noopener"
-        >
-          Szczecin · przy Baszcie
-        </a>
+        <a href="https://maps.app.goo.gl/kZiaMfSkFQQkNFNQ7" target="_blank" rel="noopener">Szczecin · przy Baszcie</a>
         · Kawa · Pizza · Wino · Piano Café
       </p>
     </div>
   </footer>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const year = document.getElementById("year");
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    year.textContent = new Date().getFullYear();
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = document.body.classList.toggle("nav-open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.setAttribute("aria-label", isOpen ? "Zamknij menu" : "Otwórz menu");
+    });
+
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        document.body.classList.remove("nav-open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Otwórz menu");
+      }
+    });
   </script>
 </body>
 </html>
