@@ -255,7 +255,7 @@
       overflow: hidden;
       background:
         linear-gradient(90deg, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.62) 42%, rgba(0,0,0,0.18) 100%),
-        url("assets/hero.jpg") center/cover no-repeat;
+        url("assets/hero.png") center/cover no-repeat;
     }
 
     .hero::after {
@@ -428,81 +428,110 @@
       max-width: 520px;
     }
 
-    .menu-grid {
+    .menu-board {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
     }
 
-    .menu-card {
+    .menu-category {
       position: relative;
-      min-height: 390px;
-      border-radius: var(--radius-lg);
       overflow: hidden;
-      background: var(--black-soft);
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.032)),
+        rgba(18,18,18,0.96);
+      border: 1px solid rgba(255,255,255,0.12);
       box-shadow: var(--shadow);
     }
 
-    .menu-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      inset: 0;
-      opacity: 0.68;
-      transition: 0.3s ease;
-    }
-
-    .menu-card:hover img {
-      transform: scale(1.05);
-      opacity: 0.82;
-    }
-
-    .menu-card::after {
+    .menu-category::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1));
+      top: -80px;
+      right: -80px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(200,169,106,0.10);
+      pointer-events: none;
     }
 
-    .menu-card-content {
-      position: absolute;
-      inset: auto 0 0;
-      z-index: 2;
-      padding: 26px;
-    }
-
-    .menu-card h3 {
+    .menu-category h3 {
+      position: relative;
       font-family: "Cormorant Garamond", serif;
-      font-size: 2.1rem;
-      margin-bottom: 10px;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      line-height: 1;
+      margin-bottom: 8px;
+      color: var(--ivory);
     }
 
-    .menu-card p {
-      color: rgba(255,255,255,0.74);
-      font-size: 0.96rem;
-      margin-bottom: 16px;
+    .menu-category .menu-note {
+      position: relative;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 22px;
     }
 
-    .menu-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .menu-list {
+      position: relative;
+      display: grid;
+      gap: 13px;
     }
 
-    .menu-items span {
-      font-size: 0.78rem;
-      color: var(--black);
-      background: var(--ivory);
-      border-radius: 999px;
-      padding: 6px 9px;
-      font-weight: 700;
+    .menu-line {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: baseline;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(255,255,255,0.18);
+    }
+
+    .menu-line strong {
+      color: var(--text);
+      font-size: 0.98rem;
+    }
+
+    .menu-line small {
+      display: block;
+      margin-top: 3px;
+      color: rgba(191,181,165,0.86);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .menu-line span {
+      color: var(--gold);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .menu-category-wide {
+      grid-column: span 2;
+    }
+
+    .menu-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .menu-disclaimer {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border: 1px solid rgba(200,169,106,0.26);
+      border-radius: var(--radius-md);
+      color: rgba(255,255,255,0.76);
+      background: rgba(200,169,106,0.08);
+      font-size: 0.9rem;
     }
 
     .pizza {
       background:
         linear-gradient(90deg, rgba(0,0,0,0.88), rgba(0,0,0,0.42)),
-        url("assets/oven.jpg") center/cover no-repeat;
+        url("assets/oven.png") center/cover no-repeat;
       background-attachment: fixed;
       position: relative;
     }
@@ -699,8 +728,16 @@
         grid-template-columns: 1fr;
       }
 
-      .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .menu-board {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-category-wide {
+        grid-column: span 1;
+      }
+
+      .menu-columns {
+        grid-template-columns: 1fr;
       }
 
       .gallery-grid {
@@ -755,17 +792,12 @@
         display: block;
       }
 
-      .menu-grid,
       .gallery-grid {
         grid-template-columns: 1fr;
       }
 
       .gallery-item:first-child {
         grid-column: span 1;
-      }
-
-      .menu-card {
-        min-height: 330px;
       }
 
       .image-card {
@@ -890,7 +922,7 @@
         </div>
 
         <div class="image-card">
-          <img src="assets/piano.jpg" alt="Fortepian w Piano Café Baszta">
+          <img src="assets/piano.png" alt="Fortepian w Piano Café Baszta">
           <div class="floating-note">
             <strong>Piano Café</strong>
             Miejsce, które łączy smak, elegancję i spokojny rytm spotkań.
@@ -904,64 +936,118 @@
         <div class="section-head">
           <div>
             <div class="eyebrow">Menu</div>
-            <h2 class="section-title">Od espresso po pizzę z ognia</h2>
+            <h2 class="section-title">Menu uporządkowane jak dobra partytura</h2>
           </div>
           <p class="section-text">
-            Proste, czytelne menu online. Kawa, herbata, lemoniady, napoje,
-            pizza, wino, prosecco i szampan.
+            Bez zdjęć skanowanego menu, za to czytelnie i elegancko: kawa, herbata,
+            lemoniady, napoje, pizza z pieca, wino, szampan i piwo.
           </p>
         </div>
 
-        <div class="menu-grid">
-          <article class="menu-card">
-            <img src="assets/menu-coffee.jpg" alt="Kawa w Piano Café Baszta">
-            <div class="menu-card-content">
-              <h3>Kawa i herbata</h3>
-              <p>Espresso, cappuccino, latte, americano oraz klasyczne herbaty.</p>
-              <div class="menu-items">
-                <span>Espresso</span>
-                <span>Latte</span>
-                <span>Cappuccino</span>
-              </div>
+        <div class="menu-board">
+          <article class="menu-category">
+            <h3>Kawa</h3>
+            <p class="menu-note">Klasyki kawowe na szybkie espresso albo dłuższe spotkanie.</p>
+            <div class="menu-list">
+              <div class="menu-line"><strong>Espresso</strong><span>5 zł</span></div>
+              <div class="menu-line"><strong>Espresso Doppio</strong><span>10 zł</span></div>
+              <div class="menu-line"><strong>Cappuccino</strong><span>10 zł</span></div>
+              <div class="menu-line"><strong>Latte</strong><span>10 zł</span></div>
+              <div class="menu-line"><strong>Americano</strong><span>10 zł</span></div>
+              <div class="menu-line"><strong>Kawa z mlekiem</strong><span>10 zł</span></div>
             </div>
           </article>
 
-          <article class="menu-card">
-            <img src="assets/menu-pizza.jpg" alt="Pizza z pieca opalanego drewnem">
-            <div class="menu-card-content">
-              <h3>Pizza</h3>
-              <p>Margherita, Parma, Prosciutto, Diavolo, Capricciosa, Trufla i więcej.</p>
-              <div class="menu-items">
-                <span>Ø 32 cm</span>
-                <span>Dla dzieci</span>
-                <span>Z pieca</span>
+          <article class="menu-category">
+            <h3>Herbata i lemoniady</h3>
+            <p class="menu-note">Na ciepło, na zimno, leniwie pod szkłem oranżerii.</p>
+            <div class="menu-list">
+              <div class="menu-line">
+                <strong>Herbata, różne rodzaje<small>czarna, zielona, owocowa, ziołowa, mięta, Earl Grey</small></strong>
+                <span>10 zł</span>
               </div>
+              <div class="menu-line"><strong>Lemoniada cytrynowa</strong><span>20 zł</span></div>
+              <div class="menu-line"><strong>Lemoniada truskawkowa</strong><span>20 zł</span></div>
+              <div class="menu-line"><strong>Lemoniada mojito<small>serwowana na Sprite</small></strong><span>25 zł</span></div>
             </div>
           </article>
 
-          <article class="menu-card">
-            <img src="assets/interior.jpg" alt="Wnętrze kawiarni Baszta">
-            <div class="menu-card-content">
-              <h3>Lemoniady</h3>
-              <p>Cytrynowa, truskawkowa oraz mojito serwowana na Sprite.</p>
-              <div class="menu-items">
-                <span>Cytrynowa</span>
-                <span>Truskawkowa</span>
-                <span>Mojito</span>
-              </div>
+          <article class="menu-category">
+            <h3>Napoje</h3>
+            <p class="menu-note">Woda, klasyczne napoje gazowane i soki.</p>
+            <div class="menu-list">
+              <div class="menu-line"><strong>Woda 0,5 l<small>gazowana / niegazowana</small></strong><span>7 zł</span></div>
+              <div class="menu-line"><strong>Coca-Cola 0,33 l<small>normalna lub zero</small></strong><span>9 zł</span></div>
+              <div class="menu-line"><strong>Fanta 0,33 l</strong><span>9 zł</span></div>
+              <div class="menu-line"><strong>Sprite 0,33 l</strong><span>9 zł</span></div>
+              <div class="menu-line"><strong>Sok Cappy 0,33 l<small>pomarańczowy / jabłkowy</small></strong><span>10 zł</span></div>
             </div>
           </article>
 
-          <article class="menu-card">
-            <img src="assets/cafe-exterior.jpg" alt="Piano Café Baszta z zewnątrz">
-            <div class="menu-card-content">
-              <h3>Wino</h3>
-              <p>Wino białe, czerwone, musujące, prosecco i szampan.</p>
-              <div class="menu-items">
-                <span>Prosecco</span>
-                <span>Wino</span>
-                <span>Szampan</span>
+          <article class="menu-category">
+            <h3>Wino, szampan i piwo</h3>
+            <p class="menu-note">Na wieczór przy pianinie albo spotkanie pod Basztą.</p>
+            <div class="menu-list">
+              <div class="menu-line"><strong>Moët & Chandon 0,75 l</strong><span>400 zł</span></div>
+              <div class="menu-line"><strong>Moët & Chandon 0,2 l</strong><span>125 zł</span></div>
+              <div class="menu-line"><strong>G.H. Mumm butelka 0,75 l</strong><span>360 zł</span></div>
+              <div class="menu-line"><strong>Bottega Gold 0,75 l</strong><span>200 zł</span></div>
+              <div class="menu-line"><strong>Bottega Gold Mini 0,2 l</strong><span>50 zł</span></div>
+              <div class="menu-line"><strong>Bottega Rose 0,75 l</strong><span>240 zł</span></div>
+              <div class="menu-line"><strong>Baszta Pils 0,5 l</strong><span>20 zł</span></div>
+              <div class="menu-line"><strong>Grimbergen 0,33 l</strong><span>15 zł</span></div>
+            </div>
+          </article>
+
+          <article class="menu-category menu-category-wide">
+            <h3>Pizza z pieca opalanego drewnem</h3>
+            <p class="menu-note">Rozmiar normalny Ø 32 cm. Minipizza dla dzieci Ø 20 cm.</p>
+            <div class="menu-columns">
+              <div class="menu-list">
+                <div class="menu-line">
+                  <strong>Margherita<small>sos pomidorowy, mozzarella, bazylia</small></strong>
+                  <span>30 zł</span>
+                </div>
+                <div class="menu-line">
+                  <strong>Parma<small>sos pomidorowy, mozzarella, pomidory cherry, parmezan, rukola</small></strong>
+                  <span>45 zł</span>
+                </div>
+                <div class="menu-line">
+                  <strong>Prosciutto<small>sos pomidorowy, mozzarella, szynka prosciutto, świeża bazylia</small></strong>
+                  <span>40 zł</span>
+                </div>
+                <div class="menu-line">
+                  <strong>Diavolo<small>sos pomidorowy, mozzarella, salami chorizo, cebula, jalapeño chilli, świeża bazylia</small></strong>
+                  <span>50 zł</span>
+                </div>
+                <div class="menu-line">
+                  <strong>Capricciosa<small>sos pomidorowy, mozzarella, szynka, pieczarki, świeża bazylia</small></strong>
+                  <span>40 zł</span>
+                </div>
               </div>
+
+              <div class="menu-list">
+                <div class="menu-line">
+                  <strong>Marinara<small>sos pomidorowy, czosnek, rozmaryn, świeża bazylia</small></strong>
+                  <span>30 zł</span>
+                </div>
+                <div class="menu-line">
+                  <strong>Salami<small>sos pomidorowy, mozzarella, salami, świeża bazylia</small></strong>
+                  <span>45 zł</span>
+                </div>
+                <div class="menu-line">
+                  <strong>Trufla<small>sos śmietanowy, mozzarella, trufla</small></strong>
+                  <span>90 zł</span>
+                </div>
+                <div class="menu-line"><strong>Grissini<small>włoskie gorące pieczywo w postaci paluszków</small></strong><span>15 zł</span></div>
+                <div class="menu-line"><strong>Focaccia<small>włoskie gorące pieczywo na bazie placka do pizzy, czosnek i oliwa z oliwek</small></strong><span>20 zł</span></div>
+                <div class="menu-line"><strong>Minipizza dla dzieci<small>Margherita albo Capricciosa</small></strong><span>20 zł</span></div>
+              </div>
+            </div>
+
+            <div class="menu-disclaimer">
+              Do opakowań doliczana jest opłata SUP zgodnie z obowiązującymi przepisami.
+              Kaucja za opakowania zwrotne, np. butelki, wynosi 0,50 zł.
             </div>
           </article>
         </div>
@@ -1015,23 +1101,19 @@
 
         <div class="gallery-grid">
           <figure class="gallery-item">
-            <img src="assets/cafe-exterior.jpg" alt="Zewnętrzna część Piano Café Baszta">
+            <img src="assets/cafe-exterior.png" alt="Zewnętrzna część Piano Café Baszta">
           </figure>
 
           <figure class="gallery-item">
-            <img src="assets/piano.jpg" alt="Fortepian w kawiarni">
+            <img src="assets/piano.png" alt="Fortepian w kawiarni">
           </figure>
 
           <figure class="gallery-item">
-            <img src="assets/oven.jpg" alt="Piec opalany drewnem">
+            <img src="assets/oven.png" alt="Piec opalany drewnem">
           </figure>
 
           <figure class="gallery-item">
-            <img src="assets/interior.jpg" alt="Wnętrze Piano Café Baszta">
-          </figure>
-
-          <figure class="gallery-item">
-            <img src="assets/menu-pizza.jpg" alt="Menu pizzy">
+            <img src="assets/interior.png" alt="Wnętrze Piano Café Baszta">
           </figure>
         </div>
       </div>
