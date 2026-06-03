@@ -814,6 +814,149 @@
         align-items: flex-start;
       }
     }
+
+    /* Poprawki produkcyjne: ścieżka logo, czytelniejszy header i lepszy mobile */
+    .logo-image {
+      flex: 0 0 auto;
+    }
+
+    .logo-image img,
+    .hero-logo img,
+    .footer-brand img {
+      display: block;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.92), rgba(0,0,0,0.68), rgba(0,0,0,0));
+      }
+
+      .nav {
+        padding: 12px 0;
+      }
+
+      .hero {
+        min-height: 100svh;
+        background-position: center top;
+      }
+
+      .hero-content {
+        padding-top: 96px;
+        padding-bottom: 56px;
+      }
+
+      .hero h1 {
+        max-width: 10ch;
+      }
+
+      .hero-actions {
+        margin-bottom: 24px;
+      }
+
+      .hero-actions .btn {
+        flex: 1 1 170px;
+      }
+
+      .badge {
+        font-size: 0.82rem;
+        padding: 8px 11px;
+      }
+
+      .menu-category {
+        padding: 24px;
+      }
+
+      .menu-line {
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+      }
+
+      .menu-line strong {
+        font-size: 0.94rem;
+      }
+
+      .menu-line small {
+        font-size: 0.78rem;
+      }
+
+      .contact-card {
+        border-radius: 22px;
+      }
+
+      .map-wrap,
+      .map-frame {
+        min-height: 330px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .container,
+      .hero-content {
+        width: min(100% - 24px, 1160px);
+      }
+
+      .logo-image {
+        width: 118px;
+        height: 44px;
+        padding: 6px 9px;
+        border-radius: 14px;
+      }
+
+      .logo-image img {
+        max-height: 32px;
+      }
+
+      .hero-logo {
+        width: min(170px, 64vw);
+        padding: 12px 15px;
+        margin-bottom: 16px;
+        border-radius: 20px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 16vw, 4.25rem);
+        line-height: 0.88;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 0.98rem;
+        line-height: 1.55;
+        margin-bottom: 24px;
+      }
+
+      .section-title {
+        font-size: clamp(2.25rem, 12vw, 3.25rem);
+      }
+
+      .section-text {
+        font-size: 0.98rem;
+      }
+
+      .menu-category h3 {
+        font-size: 2rem;
+      }
+
+      .menu-board,
+      .menu-columns,
+      .features,
+      .occasion-grid {
+        gap: 16px;
+      }
+
+      .gallery-grid {
+        grid-auto-rows: 220px;
+      }
+
+      .footer-brand {
+        align-items: flex-start;
+      }
+
+      .footer-brand img {
+        width: 76px;
+      }
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -840,7 +983,7 @@
   <header>
     <nav class="nav">
       <a href="#" class="logo-image" aria-label="Piano Café Baszta">
-        <img src="assets/logo-baszta.png" alt="Piano Café Baszta">
+        <img src="assets/logo.png" alt="Piano Café Baszta">
       </a>
 
       <div class="nav-links">
@@ -858,7 +1001,7 @@
       <div class="hero-content">
         <div class="hero-inner">
           <div class="hero-logo" aria-hidden="true">
-            <img src="assets/logo-baszta.png" alt="">
+            <img src="assets/logo.png" alt="">
           </div>
           <div class="eyebrow">Szczecin · przy Baszcie</div>
           <h1>Piano Café <em>Baszta</em></h1>
@@ -1225,7 +1368,7 @@
   <footer>
     <div class="container footer-inner">
       <div class="footer-brand">
-        <img src="assets/logo-baszta.png" alt="Piano Café Baszta">
+        <img src="assets/logo.png" alt="Piano Café Baszta">
         <p>© <span id="year"></span> Piano Café Baszta. Wszystkie prawa zastrzeżone.</p>
       </div>
       <p>
