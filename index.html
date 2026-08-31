@@ -8,10 +8,9 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
 
-
   <meta
     name="description"
-    content="Piano Café Baszta w Szczecinie. Kawa, pizza z pieca opalanego drewnem, wino, lemoniady i elegancka przestrzeń przy Baszcie. Otwarte codziennie 9:00–17:00."
+    content="Piano Café Baszta w Szczecinie. Kawa, pizza z pieca opalanego drewnem, wino, lemoniady i elegancka przestrzeń przy Baszcie. Poniedziałek nieczynne, wtorek–piątek 10:00–18:00, sobota–niedziela 12:00–20:00."
   />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +72,9 @@
       pointer-events: none;
       opacity: 0.035;
       z-index: -1;
-      background-image: linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
+      background-image:
+        linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px);
       background-size: 46px 46px;
       mask-image: linear-gradient(to bottom, black, transparent 82%);
     }
@@ -295,9 +296,20 @@
     .nav-toggle span:nth-child(1) { top: 16px; }
     .nav-toggle span:nth-child(2) { top: 23px; }
     .nav-toggle span:nth-child(3) { top: 30px; }
-    body.nav-open .nav-toggle span:nth-child(1) { top: 23px; transform: rotate(45deg); }
-    body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
-    body.nav-open .nav-toggle span:nth-child(3) { top: 23px; transform: rotate(-45deg); }
+
+    body.nav-open .nav-toggle span:nth-child(1) {
+      top: 23px;
+      transform: rotate(45deg);
+    }
+
+    body.nav-open .nav-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    body.nav-open .nav-toggle span:nth-child(3) {
+      top: 23px;
+      transform: rotate(-45deg);
+    }
 
     .hero {
       position: relative;
@@ -911,7 +923,9 @@
     }
 
     @media (max-width: 760px) {
-      :root { --nav-height: 72px; }
+      :root {
+        --nav-height: 72px;
+      }
 
       header {
         padding: 10px 0;
@@ -1132,7 +1146,9 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
@@ -1180,16 +1196,22 @@
       {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": [
-          "Monday",
           "Tuesday",
           "Wednesday",
           "Thursday",
-          "Friday",
+          "Friday"
+        ],
+        "opens": "10:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
           "Saturday",
           "Sunday"
         ],
-        "opens": "09:00",
-        "closes": "17:00"
+        "opens": "12:00",
+        "closes": "20:00"
       }
     ],
     "priceRange": "$$"
@@ -1227,8 +1249,11 @@
           <div class="hero-logo" aria-hidden="true">
             <img src="assets/logo.png" alt="">
           </div>
+
           <div class="eyebrow">Szczecin · przy Baszcie</div>
+
           <h1>Piano Café <em>Baszta</em></h1>
+
           <p>
             Kawa, pizza z pieca opalanego drewnem, wino i elegancka przestrzeń,
             w której spotykają się muzyka, szkło, zieleń i wyjątkowy klimat Szczecina.
@@ -1251,7 +1276,7 @@
             <span class="badge">Fortepian w lokalu</span>
             <span class="badge">Kawa i lemoniady</span>
             <span class="badge">Wino i prosecco</span>
-            <span class="badge">Codziennie 9:00–17:00</span>
+            <span class="badge">Wt.–Pt. 10:00–18:00 · Sob.–Nd. 12:00–20:00</span>
           </div>
         </div>
       </div>
@@ -1261,7 +1286,9 @@
       <div class="container split">
         <div>
           <div class="eyebrow">O miejscu</div>
+
           <h2 class="section-title">Kawiarnia, która ma własny rytm</h2>
+
           <p class="section-text">
             Piano Café Baszta to kameralna, przeszklona przestrzeń przy jednej
             z najbardziej charakterystycznych baszt Szczecina. To miejsce na spokojną
@@ -1306,6 +1333,7 @@
             <div class="eyebrow">Menu</div>
             <h2 class="section-title">Menu uporządkowane jak dobra partytura</h2>
           </div>
+
           <p class="section-text">
             Bez zdjęć skanowanego menu, za to czytelnie i elegancko: kawa, herbata,
             lemoniady, napoje, pizza z pieca, wino, szampan i piwo.
@@ -1316,6 +1344,7 @@
           <article class="menu-category">
             <h3>Kawa</h3>
             <p class="menu-note">Klasyki kawowe na szybkie espresso albo dłuższe spotkanie.</p>
+
             <div class="menu-list">
               <div class="menu-line"><strong>Espresso</strong><span>5 zł</span></div>
               <div class="menu-line"><strong>Espresso Doppio</strong><span>10 zł</span></div>
@@ -1328,36 +1357,91 @@
 
           <article class="menu-category">
             <h3>Herbata i lemoniady</h3>
-            <p class="menu-note">Na ciepło, na zimno, leniwie pod szkłem oranżerii.</p>
+
+            <p class="menu-note">
+              Na ciepło, na zimno, leniwie pod szkłem oranżerii.
+            </p>
+
             <div class="menu-list">
               <div class="menu-line">
-                <strong>Herbata, różne rodzaje<small>czarna, zielona, owocowa, ziołowa, mięta, Earl Grey</small></strong>
+                <strong>
+                  Herbata, różne rodzaje
+                  <small>czarna, zielona, owocowa, ziołowa, mięta, Earl Grey</small>
+                </strong>
                 <span>10 zł</span>
               </div>
-              <div class="menu-line"><strong>Lemoniada cytrynowa</strong><span>20 zł</span></div>
-              <div class="menu-line"><strong>Lemoniada truskawkowa</strong><span>20 zł</span></div>
-              <div class="menu-line"><strong>Lemoniada mojito<small>serwowana na Sprite</small></strong><span>25 zł</span></div>
+
+              <div class="menu-line">
+                <strong>Lemoniada cytrynowa</strong>
+                <span>20 zł</span>
+              </div>
+
+              <div class="menu-line">
+                <strong>Lemoniada truskawkowa</strong>
+                <span>20 zł</span>
+              </div>
+
+              <div class="menu-line">
+                <strong>
+                  Lemoniada mojito
+                  <small>serwowana na Sprite</small>
+                </strong>
+                <span>25 zł</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-category">
             <h3>Napoje</h3>
             <p class="menu-note">Woda, klasyczne napoje gazowane i soki.</p>
+
             <div class="menu-list">
-              <div class="menu-line"><strong>Woda 0,5 l<small>gazowana / niegazowana</small></strong><span>7 zł</span></div>
-              <div class="menu-line"><strong>Coca-Cola 0,33 l<small>normalna lub zero</small></strong><span>9 zł</span></div>
-              <div class="menu-line"><strong>Fanta 0,33 l</strong><span>9 zł</span></div>
-              <div class="menu-line"><strong>Sprite 0,33 l</strong><span>9 zł</span></div>
-              <div class="menu-line"><strong>Sok Cappy 0,33 l<small>pomarańczowy / jabłkowy</small></strong><span>10 zł</span></div>
+              <div class="menu-line">
+                <strong>
+                  Woda 0,5 l
+                  <small>gazowana / niegazowana</small>
+                </strong>
+                <span>7 zł</span>
+              </div>
+
+              <div class="menu-line">
+                <strong>
+                  Coca-Cola 0,33 l
+                  <small>normalna lub zero</small>
+                </strong>
+                <span>9 zł</span>
+              </div>
+
+              <div class="menu-line">
+                <strong>Fanta 0,33 l</strong>
+                <span>9 zł</span>
+              </div>
+
+              <div class="menu-line">
+                <strong>Sprite 0,33 l</strong>
+                <span>9 zł</span>
+              </div>
+
+              <div class="menu-line">
+                <strong>
+                  Sok Cappy 0,33 l
+                  <small>pomarańczowy / jabłkowy</small>
+                </strong>
+                <span>10 zł</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-category">
             <h3>Wino, szampan i piwo</h3>
-            <p class="menu-note">Na wieczór przy pianinie albo spotkanie pod Basztą.</p>
+
+            <p class="menu-note">
+              Na wieczór przy pianinie albo spotkanie pod Basztą.
+            </p>
+
             <div class="menu-list">
-              <div class="menu-line"><strong>Moët & Chandon 0,75 l</strong><span>400 zł</span></div>
-              <div class="menu-line"><strong>Moët & Chandon 0,2 l</strong><span>125 zł</span></div>
+              <div class="menu-line"><strong>Moët &amp; Chandon 0,75 l</strong><span>400 zł</span></div>
+              <div class="menu-line"><strong>Moët &amp; Chandon 0,2 l</strong><span>125 zł</span></div>
               <div class="menu-line"><strong>G.H. Mumm butelka 0,75 l</strong><span>360 zł</span></div>
               <div class="menu-line"><strong>Bottega Gold 0,75 l</strong><span>200 zł</span></div>
               <div class="menu-line"><strong>Bottega Gold Mini 0,2 l</strong><span>50 zł</span></div>
@@ -1369,23 +1453,102 @@
 
           <article class="menu-category menu-category-wide">
             <h3>Pizza z pieca opalanego drewnem</h3>
-            <p class="menu-note">Rozmiar normalny Ø 32 cm. Minipizza dla dzieci Ø 20 cm.</p>
+
+            <p class="menu-note">
+              Rozmiar normalny Ø 32 cm. Minipizza dla dzieci Ø 20 cm.
+            </p>
+
             <div class="menu-columns">
               <div class="menu-list">
-                <div class="menu-line"><strong>Margherita<small>sos pomidorowy, mozzarella, bazylia</small></strong><span>30 zł</span></div>
-                <div class="menu-line"><strong>Parma<small>sos pomidorowy, mozzarella, pomidory cherry, parmezan, rukola</small></strong><span>45 zł</span></div>
-                <div class="menu-line"><strong>Prosciutto<small>sos pomidorowy, mozzarella, szynka prosciutto, świeża bazylia</small></strong><span>40 zł</span></div>
-                <div class="menu-line"><strong>Diavolo<small>sos pomidorowy, mozzarella, salami chorizo, cebula, jalapeño chilli, świeża bazylia</small></strong><span>50 zł</span></div>
-                <div class="menu-line"><strong>Capricciosa<small>sos pomidorowy, mozzarella, szynka, pieczarki, świeża bazylia</small></strong><span>40 zł</span></div>
+                <div class="menu-line">
+                  <strong>
+                    Margherita
+                    <small>sos pomidorowy, mozzarella, bazylia</small>
+                  </strong>
+                  <span>30 zł</span>
+                </div>
+
+                <div class="menu-line">
+                  <strong>
+                    Parma
+                    <small>sos pomidorowy, mozzarella, pomidory cherry, parmezan, rukola</small>
+                  </strong>
+                  <span>45 zł</span>
+                </div>
+
+                <div class="menu-line">
+                  <strong>
+                    Prosciutto
+                    <small>sos pomidorowy, mozzarella, szynka prosciutto, świeża bazylia</small>
+                  </strong>
+                  <span>40 zł</span>
+                </div>
+
+                <div class="menu-line">
+                  <strong>
+                    Diavolo
+                    <small>sos pomidorowy, mozzarella, salami chorizo, cebula, jalapeño chilli, świeża bazylia</small>
+                  </strong>
+                  <span>50 zł</span>
+                </div>
+
+                <div class="menu-line">
+                  <strong>
+                    Capricciosa
+                    <small>sos pomidorowy, mozzarella, szynka, pieczarki, świeża bazylia</small>
+                  </strong>
+                  <span>40 zł</span>
+                </div>
               </div>
 
               <div class="menu-list">
-                <div class="menu-line"><strong>Marinara<small>sos pomidorowy, czosnek, rozmaryn, świeża bazylia</small></strong><span>30 zł</span></div>
-                <div class="menu-line"><strong>Salami<small>sos pomidorowy, mozzarella, salami, świeża bazylia</small></strong><span>45 zł</span></div>
-                <div class="menu-line"><strong>Trufla<small>sos śmietanowy, mozzarella, trufla</small></strong><span>90 zł</span></div>
-                <div class="menu-line"><strong>Grissini<small>włoskie gorące pieczywo w postaci paluszków</small></strong><span>15 zł</span></div>
-                <div class="menu-line"><strong>Focaccia<small>włoskie gorące pieczywo na bazie placka do pizzy, czosnek i oliwa z oliwek</small></strong><span>20 zł</span></div>
-                <div class="menu-line"><strong>Minipizza dla dzieci<small>Margherita albo Capricciosa</small></strong><span>20 zł</span></div>
+                <div class="menu-line">
+                  <strong>
+                    Marinara
+                    <small>sos pomidorowy, czosnek, rozmaryn, świeża bazylia</small>
+                  </strong>
+                  <span>30 zł</span>
+                </div>
+
+                <div class="menu-line">
+                  <strong>
+                    Salami
+                    <small>sos pomidorowy, mozzarella, salami, świeża bazylia</small>
+                  </strong>
+                  <span>45 zł</span>
+                </div>
+
+                <div class="menu-line">
+                  <strong>
+                    Trufla
+                    <small>sos śmietanowy, mozzarella, trufla</small>
+                  </strong>
+                  <span>90 zł</span>
+                </div>
+
+                <div class="menu-line">
+                  <strong>
+                    Grissini
+                    <small>włoskie gorące pieczywo w postaci paluszków</small>
+                  </strong>
+                  <span>15 zł</span>
+                </div>
+
+                <div class="menu-line">
+                  <strong>
+                    Focaccia
+                    <small>włoskie gorące pieczywo na bazie placka do pizzy, czosnek i oliwa z oliwek</small>
+                  </strong>
+                  <span>20 zł</span>
+                </div>
+
+                <div class="menu-line">
+                  <strong>
+                    Minipizza dla dzieci
+                    <small>Margherita albo Capricciosa</small>
+                  </strong>
+                  <span>20 zł</span>
+                </div>
               </div>
             </div>
 
@@ -1402,7 +1565,9 @@
       <div class="container">
         <div class="pizza-box">
           <div class="eyebrow">Pizza z pieca opalanego drewnem</div>
+
           <h2 class="section-title">Pizza prosto z ognia</h2>
+
           <p class="section-text">
             Chrupiące ciasto, klasyczne składniki i piec opalany drewnem.
             To smak, który pasuje do lunchu, wieczornego spotkania i kieliszka wina.
@@ -1422,17 +1587,30 @@
     <section id="galeria" class="gallery">
       <div class="container">
         <div class="eyebrow">Galeria</div>
+
         <h2 class="section-title">Zajrzyj do środka</h2>
+
         <p class="section-text">
           Szklany pawilon, zieleń Baszty, fortepian, piec opalany drewnem
           i przestrzeń, która dobrze wygląda o każdej porze dnia.
         </p>
 
         <div class="gallery-grid">
-          <figure class="gallery-item"><img src="assets/cafe-exterior.png" alt="Zewnętrzna część Piano Café Baszta"></figure>
-          <figure class="gallery-item"><img src="assets/piano.png" alt="Fortepian w kawiarni"></figure>
-          <figure class="gallery-item"><img src="assets/oven.png" alt="Piec opalany drewnem"></figure>
-          <figure class="gallery-item"><img src="assets/interior.png" alt="Wnętrze Piano Café Baszta"></figure>
+          <figure class="gallery-item">
+            <img src="assets/cafe-exterior.png" alt="Zewnętrzna część Piano Café Baszta">
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/piano.png" alt="Fortepian w kawiarni">
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/oven.png" alt="Piec opalany drewnem">
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/interior.png" alt="Wnętrze Piano Café Baszta">
+          </figure>
         </div>
       </div>
     </section>
@@ -1440,7 +1618,9 @@
     <section>
       <div class="container">
         <div class="eyebrow">Dla kogo</div>
+
         <h2 class="section-title">Na kawę, spotkanie i wieczór przy winie</h2>
+
         <p class="section-text">
           Baszta sprawdza się jako miejsce na szybkie espresso, rodzinny lunch,
           spotkanie biznesowe albo spokojny wieczór w eleganckiej scenerii.
@@ -1470,25 +1650,66 @@
         <div class="contact-card">
           <div class="contact-info">
             <div class="eyebrow">Kontakt i lokalizacja</div>
+
             <h2>Znajdziesz nas przy Baszcie</h2>
+
             <p>
-              Wpadnij na kawę, pizzę z pieca opalanego drewnem i chwilę w wyjątkowej przestrzeni Piano Café Baszta. Jesteśmy otwarci codziennie od 9:00 do 17:00.
+              Wpadnij na kawę, pizzę z pieca opalanego drewnem i chwilę
+              w wyjątkowej przestrzeni Piano Café Baszta.
             </p>
 
             <div class="contact-list">
-              <div><strong>Piano Café Baszta</strong>Szczecin · przy Baszcie</div>
+              <div>
+                <strong>Piano Café Baszta</strong>
+                Szczecin · przy Baszcie
+              </div>
+
               <div>
                 <strong>Lokalizacja Google Maps</strong>
-                <a href="https://maps.app.goo.gl/HATG4LfxvhuyL5tR6" target="_blank" rel="noopener">Otwórz lokalizację w Google Maps</a>
+                <a
+                  href="https://maps.app.goo.gl/HATG4LfxvhuyL5tR6"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Otwórz lokalizację w Google Maps
+                </a>
               </div>
-              <div><strong>Telefon</strong><a href="tel:+48918101010">+48 91 810 10 10</a></div>
-              <div><strong>Godziny otwarcia</strong>Codziennie · 9:00–17:00</div>
-              <div><strong>Social media</strong>Instagram · Facebook</div>
+
+              <div>
+                <strong>Telefon</strong>
+                <a href="tel:+48918101010">+48 91 810 10 10</a>
+              </div>
+
+              <div>
+                <strong>Godziny otwarcia</strong>
+                Poniedziałek · nieczynne<br>
+                Wtorek · 10:00–18:00<br>
+                Środa · 10:00–18:00<br>
+                Czwartek · 10:00–18:00<br>
+                Piątek · 10:00–18:00<br>
+                Sobota · 12:00–20:00<br>
+                Niedziela · 12:00–20:00
+              </div>
+
+              <div>
+                <strong>Social media</strong>
+                Instagram · Facebook
+              </div>
             </div>
 
             <div class="hero-actions">
-              <a href="https://maps.app.goo.gl/HATG4LfxvhuyL5tR6" target="_blank" rel="noopener" class="btn btn-primary">Prowadź mnie do café</a>
-              <a href="tel:+48918101010" class="btn btn-secondary">Zadzwoń</a>
+              <a
+                href="https://maps.app.goo.gl/HATG4LfxvhuyL5tR6"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-primary"
+              >
+                Prowadź mnie do café
+              </a>
+
+              <a href="tel:+48918101010" class="btn btn-secondary">
+                Zadzwoń
+              </a>
             </div>
           </div>
 
@@ -1511,10 +1732,20 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <img src="assets/logo.png" alt="Piano Café Baszta">
-        <p>© <span id="year"></span> Piano Café Baszta. Wszystkie prawa zastrzeżone.</p>
+
+        <p>
+          © <span id="year"></span> Piano Café Baszta. Wszystkie prawa zastrzeżone.
+        </p>
       </div>
+
       <p>
-        <a href="https://maps.app.goo.gl/HATG4LfxvhuyL5tR6" target="_blank" rel="noopener">Lokalizacja Piano Café Baszta</a>
+        <a
+          href="https://maps.app.goo.gl/HATG4LfxvhuyL5tR6"
+          target="_blank"
+          rel="noopener"
+        >
+          Lokalizacja Piano Café Baszta
+        </a>
         · Kawa · Pizza · Wino · Piano Café
       </p>
     </div>
@@ -1529,8 +1760,12 @@
 
     navToggle.addEventListener("click", () => {
       const isOpen = document.body.classList.toggle("nav-open");
+
       navToggle.setAttribute("aria-expanded", String(isOpen));
-      navToggle.setAttribute("aria-label", isOpen ? "Zamknij menu" : "Otwórz menu");
+      navToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Zamknij menu" : "Otwórz menu"
+      );
     });
 
     navLinks.addEventListener("click", (event) => {
